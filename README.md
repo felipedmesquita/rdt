@@ -9,6 +9,7 @@ Create a .sql file named example_cleaned containg exactly the following columns
 1. request_id
 1. body
 9. beariz
+4. felipe
 
 ```sql
 -- example_cleaned.sql
