@@ -1,3 +1,4 @@
+[![Gem Version](https://badge.fury.io/rb/rdt.svg?icon=si%3Arubygems)](https://badge.fury.io/rb/rdt)
 # rdt (Ruby Data Tool)
 
 SQL-based data modeling for Rails applications.
