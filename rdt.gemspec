@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = "rdt"
-  s.version     = "0.1.0"
+  s.version     = "0.1.1"
   s.summary     = "Ruby Data Tool"
   s.description = "SQL-based data modeling for Rails applications and Postgres"
   s.authors     = ["Felipe Mesquita"]

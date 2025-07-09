@@ -5,7 +5,7 @@ loader.setup
 require "dagwood"
 
 module Rdt
-  SCHEMA = "rdt"
+  SCHEMA = "felipe_dbt"
 
   def self.settings
     @settings ||= begin
