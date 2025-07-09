@@ -1,3 +1,4 @@
+[![Gem Version](https://badge.fury.io/rb/rdt.svg?icon=si%3Arubygems)](https://badge.fury.io/rb/rdt)
 # dbt
 > [!NOTE] 
 > This gem is being renamed to **rdt (ruby data tool)** so it can be published in rubygems.
