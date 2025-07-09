@@ -4,12 +4,14 @@ loader.setup
 
 require "dagwood"
 
-module Dbt
-  SCHEMA = "felipe_dbt"
+module Rdt
+  SCHEMA = "rdt"
 
   def self.settings
     @settings ||= begin
-      path = Rails.root.join("config", "dbt.yml").to_s
+      rdt_path = Rails.root.join("config", "rdt.yml").to_s
+      dbt_path = Rails.root.join("config", "dbt.yml").to_s
+      path = File.exist?(rdt_path) ? rdt_path : dbt_path
       if File.exist?(path)
         YAML.safe_load(ERB.new(File.read(path)).result, aliases: true)
       else
@@ -26,3 +28,5 @@ module Dbt
     Runner.test(...)
   end
 end
+
+Dbt = Rdt

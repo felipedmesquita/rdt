@@ -1,4 +1,16 @@
-# dbt
+# rdt (Ruby Data Tool)
+
+SQL-based data modeling for Rails applications.
+
+## Usage
+
+Use `Rdt.run` to build your models:
+
+```ruby
+Rdt.run
+```
+
+**Note:** Legacy `Dbt.run` still works but shows deprecation warnings.
 
 ## Resources from the Extractor gem
 Basic steps to clean, deduplicate and model Extractor results:
@@ -55,7 +67,7 @@ SQL models are currently materialized as either views or materialized views, tho
 ```ruby
 # app/models/example_name.rb
 class ExampleName < ApplicationRecord
-  self.table_name = "felipe_dbt.example_model"
+  self.table_name = "rdt.example_model"
 end
 ```
 This, after re-entering the rails console, enables queries like:

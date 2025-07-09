@@ -1,5 +1,5 @@
 require "base64"
-module Dbt
+module Rdt
   class Mermaid
     class << self
       def markdown_for(dag)

@@ -1,4 +1,4 @@
-module Dbt
+module Rdt
   class Model
     include SqlTemplateHelpers
 

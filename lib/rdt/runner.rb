@@ -1,8 +1,8 @@
-module Dbt
+module Rdt
   class Runner
     class << self
       def run(custom_schema = nil, glob_path = "app/sql/**/*.sql")
-        schema = custom_schema || Dbt.settings["schema"] || Dbt::SCHEMA
+        schema = custom_schema || Rdt.settings["schema"] || Rdt::SCHEMA
         ActiveRecord::Base.connection.execute "CREATE SCHEMA IF NOT EXISTS #{schema}"
         file_paths = Dir.glob(glob_path)
         models = file_paths.map { |fp| Model.new(fp, schema) }
@@ -19,7 +19,7 @@ module Dbt
 
       def test
         puts "Running tests..."
-        schema = Dbt.settings["schema"] || Dbt::SCHEMA
+        schema = Rdt.settings["schema"] || Rdt::SCHEMA
         tables = run(schema, "app/sql_test/**/*.sql")
         tables.each do |table|
           puts "TEST #{table}"

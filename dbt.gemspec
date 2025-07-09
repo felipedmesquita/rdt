@@ -1,14 +1,15 @@
 Gem::Specification.new do |s|
-  s.name        = "dbt"
-  s.version     = "0.0.8"
-  s.summary     = "Dbt"
-  s.description = "A simple hello world gem"
+  s.name        = "rdt"
+  s.version     = "0.1.0"
+  s.summary     = "Ruby Data Tool"
+  s.description = "SQL-based data modeling for Rails applications and Postgres"
   s.authors     = ["Felipe Mesquita"]
   s.email       = "felipemesquita@hey.com"
-  s.files       = ["lib/dbt.rb", "lib/dbt/model.rb"]
+  s.files       = Dir["lib/**/*.rb"]
   s.homepage    = "https://github.com/felipedmesquita/dbt"
   s.license     = "MIT"
 
   s.add_dependency 'dagwood', '~> 1.0'
   s.add_dependency 'zeitwerk'
+  s.add_dependency 'activerecord', '>= 6.0'
 end

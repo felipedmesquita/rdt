@@ -1,4 +1,4 @@
-module Dbt
+module Rdt
   module SqlTemplateHelpers
 
     def star relation, *exclued_columns
