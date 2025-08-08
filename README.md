@@ -1,13 +1,22 @@
 [![Gem Version](https://badge.fury.io/rb/rdt.svg?icon=si%3Arubygems)](https://badge.fury.io/rb/rdt)
-# dbt
+# rdt (Ruby Data Tool)
+
+SQL-based data modeling for Rails applications.
+
+## Usage
+
+Use `Rdt.run` to build your models:
+
+```ruby
+Rdt.run
+```
+
 > [!NOTE] 
 > This gem is being renamed to **rdt (ruby data tool)** so it can be published in rubygems.
 
 ## Name change
 1. Replace `gem "dbt", github: "felipedmesquita/dbt"` with `gem "rdt"`
 2. Done
-
-**Please open an issue if you run into any compatibilty problems with the version published in rubygems**
 
 Work on the rubygems version is being done in the `rdt` branch out of an abundace of caution, there shouldn't be any breaking changes even for apps that continue using the Dbt namespace:
 - Prefer `Rdt.run` in new apps, `Dbt.run` still works
@@ -73,7 +82,7 @@ SQL models are currently materialized as either views or materialized views, tho
 ```ruby
 # app/models/example_name.rb
 class ExampleName < ApplicationRecord
-  self.table_name = "felipe_dbt.example_model"
+  self.table_name = "rdt.example_model"
 end
 ```
 This, after re-entering the rails console, enables queries like:
