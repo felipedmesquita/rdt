@@ -18,12 +18,11 @@ Rdt.run
 1. Replace `gem "dbt", github: "felipedmesquita/dbt"` with `gem "rdt"`
 2. Done
 
-Work on the rubygems version is being done in the `rdt` branch out of an abundace of caution, there shouldn't be any breaking changes even for apps that continue using the Dbt namespace:
 - Prefer `Rdt.run` in new apps, `Dbt.run` still works
 - `config/rdt.yml` takes precedence over `config/dbt.yml`
 
 #### Planed breaking changes
-Pin `gem "rdt", "~> 0.1.1` to only get patches for the current version.
+You can pin unmaintaned old apps to `gem "rdt", "= 0.1.1`.
 - The default schema will be changed from `felipe_dbt` to `rdt`
 - Use of the Dbt namespace will first emmit deprecation warnings, and then be removed in a future version
 
