@@ -3,15 +3,15 @@ module Rdt
     include SqlTemplateHelpers
 
     attr_reader :name,
-                :code,
-                :materialize_as,
-                :sources,
-                :refs,
-                :built,
-                :filepath,
-                :skip,
-                :is_incremental,
-                :unique_by_column
+      :code,
+      :materialize_as,
+      :sources,
+      :refs,
+      :built,
+      :filepath,
+      :skip,
+      :is_incremental,
+      :unique_by_column
 
     def initialize(filepath, schema = SCHEMA)
       @filepath = filepath
@@ -39,18 +39,18 @@ module Rdt
 
       def build_as kind, unique_by: "unique_by"
         case kind.to_s.downcase
-          when "view"
-            @materialize_as = "VIEW"
-          when "table"
+        when "view"
+          @materialize_as = "VIEW"
+        when "table"
+          @materialize_as = "TABLE"
+        when "incremental"
+          if get_relation_type(this) != "TABLE"
             @materialize_as = "TABLE"
-          when "incremental"
-            if get_relation_type(this) != "TABLE"
-              @materialize_as = "TABLE"
-              @is_incremental = false
-            else
-              @is_incremental = true
-              @unique_by_column = unique_by
-            end
+            @is_incremental = false
+          else
+            @is_incremental = true
+            @unique_by_column = unique_by
+          end
         else
           raise "Invalid build_as materialization: #{kind}"
         end
@@ -82,7 +82,7 @@ module Rdt
 
         # drop the temp table if it exists
         ActiveRecord::Base.connection.execute <<~SQL
-        DROP TABLE IF EXISTS #{temp_table};
+          DROP TABLE IF EXISTS #{temp_table};
         SQL
 
         # create a temp table with the same schema as the source
@@ -112,32 +112,32 @@ module Rdt
 
       else
         puts "BUILDING #{@name}"
-        curent_relation_type = get_relation_type(this)
+        get_relation_type(this)
         case @materialize_as
-          when "VIEW"
-            ActiveRecord::Base.connection.execute <<~SQL
-              BEGIN;
-              #{drop_relation(this)}
-              CREATE VIEW #{this} AS (
-                #{@code}
-              );
-              COMMIT;
-            SQL
-          when "TABLE"
-            temp_table = "#{@schema}.#{@name}_build_step_temp_table"
-            ActiveRecord::Base.connection.execute <<~SQL
-              DROP TABLE IF EXISTS #{temp_table};
-              CREATE TABLE #{temp_table} AS (
-                #{@code}
-              );
-              BEGIN;
-              #{drop_relation(this)}
-              ALTER TABLE #{temp_table} RENAME TO #{@name};
-              DROP TABLE IF EXISTS #{temp_table};
-              COMMIT;
-            SQL
-          else
-            raise "Invalid materialize_as: #{@materialize_as}"
+        when "VIEW"
+          ActiveRecord::Base.connection.execute <<~SQL
+            BEGIN;
+            #{drop_relation(this)}
+            CREATE VIEW #{this} AS (
+              #{@code}
+            );
+            COMMIT;
+          SQL
+        when "TABLE"
+          temp_table = "#{@schema}.#{@name}_build_step_temp_table"
+          ActiveRecord::Base.connection.execute <<~SQL
+            DROP TABLE IF EXISTS #{temp_table};
+            CREATE TABLE #{temp_table} AS (
+              #{@code}
+            );
+            BEGIN;
+            #{drop_relation(this)}
+            ALTER TABLE #{temp_table} RENAME TO #{@name};
+            DROP TABLE IF EXISTS #{temp_table};
+            COMMIT;
+          SQL
+        else
+          raise "Invalid materialize_as: #{@materialize_as}"
         end
 
         @built = true
@@ -155,10 +155,9 @@ module Rdt
 
     def get_relation_type(relation)
       relnamespace, relname = relation.split(".")
-      type =
-        ActiveRecord::Base
-          .connection
-          .execute(
+      ActiveRecord::Base
+        .connection
+        .execute(
             "
       SELECT
         CASE c.relkind
@@ -170,9 +169,9 @@ module Rdt
       JOIN pg_namespace n ON n.oid = c.relnamespace
       WHERE c.relname = '#{relname}' AND n.nspname = '#{relnamespace}';"
           )
-          .values
-          .first
-          &.first
+        .values
+        .first
+        &.first
     end
 
     def assert_column_uniqueness(column, relation)

@@ -27,7 +27,7 @@ module Rdt
                 </script>
               </body>
             </html>
-            HTML
+        HTML
 
         begin
           File.write("dependencies.html", html)

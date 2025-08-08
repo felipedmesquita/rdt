@@ -7,7 +7,7 @@ module Rdt
         file_paths = Dir.glob(glob_path)
         models = file_paths.map { |fp| Model.new(fp, schema) }
         dependencies =
-          models.map { |m| { m.name => m.refs } }.reduce({}, :merge!)
+          models.map { |m| {m.name => m.refs} }.reduce({}, :merge!)
         check_if_all_refs_have_sql_files dependencies
         graph = Dagwood::DependencyGraph.new dependencies
         md = Mermaid.markdown_for dependencies
