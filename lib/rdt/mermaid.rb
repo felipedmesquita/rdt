@@ -13,23 +13,6 @@ module Rdt
         mermaid
       end
 
-      # does not work
-      def encode_to_editor_url(md)
-        json = {
-          code: md,
-          mermaid: {
-            theme: "default"
-          },
-          updateEditor: false,
-          autoSync: true,
-          updateDiagram: false
-        }
-        encoded = Base64.urlsafe_encode64(json.to_json.force_encoding("ASCII"))
-        "https://mermaid.ink/img/#{encoded}"
-        #url = encode_mermaid(diagram)
-        encoded
-      end
-
       def generate_file(chart)
         html = <<~HTML
           <!DOCTYPE html>
