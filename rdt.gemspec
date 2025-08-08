@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.authors = ["Felipe Mesquita"]
   s.email = "felipemesquita@hey.com"
   s.files = Dir["lib/**/*.rb"]
-  s.homepage = "https://github.com/felipedmesquita/dbt"
+  s.homepage = "https://github.com/felipedmesquita/rdt"
   s.license = "MIT"
 
   s.add_dependency "dagwood", "~> 1.0"
